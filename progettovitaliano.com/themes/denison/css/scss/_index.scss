@@ -1,0 +1,169 @@
+@import 'color';
+@import 'font';
+
+@mixin transition($property, $time, $timing-function) {
+   /* Firefox */
+  -moz-transition: $property $time $timing-function;
+  /* WebKit */
+  -webkit-transition: $property $time $timing-function;
+  /* Opera */
+  -o-transition: $property $time $timing-function;
+  /* Standard */
+  transition: $property $time $timing-function;
+}
+
+@mixin background-radial-gradient($innerColor, $outerColor) {
+  /* Safari 5.1+, Chrome 10+ */
+  background: -webkit-radial-gradient(circle, $innerColor, $outerColor);
+  /* Firefox 3.6+ */
+  background: -moz-radial-gradient(circle, $innerColor, $outerColor);
+  /* IE 10 */
+  background: -ms-radial-gradient(circle, $innerColor, $outerColor);
+  /* Opera */
+  background: -o-radial-gradient(circle, $innerColor, $outerColor);
+  /* Standard */
+  background: radial-gradient(circle, $innerColor, $outerColor);
+}
+
+@mixin vertical-center {
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+}
+
+@mixin vertical-horizontal-center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+.homepage-logo {
+  padding-left: 20px;
+  font-size: 2.5em;
+  line-height: 1em;
+  letter-spacing: 0.3em;
+  text-align: center;
+  margin-top: 200px;
+}
+
+.homepage-intro {
+  color: white;
+  background-color: $dark-red;
+  height: 100vh;
+  
+  & > p {
+    font-size: 1.5em;
+    line-height: 1.5em;
+    padding: 10%;
+  }
+}
+
+.highlight-jumbotron {
+  padding: 0 !important;
+  margin: 0 !important;
+  height: 100vh;
+  min-height: 600px;
+
+  & > * {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+      
+  & .section {
+    overflow: hidden;
+    position: relative;
+    top: 0;
+    height: 50vh;
+
+    & .background, & .front, & .back {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    & .background {
+      z-index: 1;
+      @include background-radial-gradient(#ffffff, #1a82f7);
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+
+    & .front {
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.6);
+      z-index: 2;
+      opacity: 1;
+      @include transition(opacity, 0.2s, ease-in-out);
+      color: $red;
+      text-align: center;
+      
+      & .container {
+        width: 60%;
+        position: relative;
+        @include vertical-center;
+        
+        & span {
+          font-size: 4em;
+          margin-bottom: 0.3em;
+        }
+        
+        & p {
+          font-size: 1.5em;
+          line-height: 1em;
+          letter-spacing: 0.2em;
+        }
+      }
+    }
+
+    & .back {
+      height: 100%;
+      background-color: rgba(138, 0, 17, 0.9);
+      z-index: 3;
+      opacity: 0;
+      @include transition(opacity, 0.2s, ease-in-out);
+      color: white;
+      padding: 10%;
+      
+      & p {
+        @extend .serif-400;
+        font-size: 1.4em;
+        line-height: 1.6em;
+      }
+      
+      & a {
+        @extend .sans-serif-700;
+        display: block;
+        font-size: 1.5em;
+        letter-spacing: 0.2em;
+        padding: 10px;
+        color: white;
+        cursor: pointer;
+        border: 5px solid white;
+        text-align: center;
+        margin: auto;
+        width: auto;
+        @include transition(background-color, 0.2s, ease-in-out);
+        margin-top: 50px;
+        
+        &:hover {
+          text-decoration: none;
+          color: $dark-red;
+          background-color: white;
+        }
+      }
+    }
+
+    &:hover .back {
+      opacity: 1;
+    }
+
+    &:hover .front {
+      opacity: 0;
+    }
+  }
+}

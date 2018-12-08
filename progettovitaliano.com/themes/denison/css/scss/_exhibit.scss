@@ -1,0 +1,96 @@
+@import 'color';
+@import 'font';
+@import 'article';
+
+@mixin column-count($num) {
+  -webkit-column-count: $num;
+  -moz-column-count: $num;
+  column-count: $num;
+}
+
+@mixin column-rule-width($width) {
+  -webkit-column-rule-width:  $width;
+  -moz-column-rule-width:  $width;
+  column-rule-width:  $width;
+}
+
+
+nav#exhibit-pages {
+  font-size: 1.5em;
+  ul {
+    list-style: none;
+    @extend .serif-400;
+    padding: 0;
+    margin: 0;
+
+    li {
+      padding: 0;
+      margin-left: 1em;
+      font-size: 100%;
+    }
+  }
+}
+
+.exhibit-block {
+  @extend .article;
+
+  margin-bottom: 120px;
+
+  .exhibit-item-caption {
+    p {
+      @extend .serif-400;
+      font-style: italic;
+      font-size: 1.5em !important;
+    }
+  }
+  
+  .gallery .exhibit-item, gallery-showcase{
+    &:hover {
+      color: white;
+      background-color: $red;
+    }
+  }
+  
+  & > h1, & > h2, & > h3, & > h4, & > h5, & > h6 {
+    @extend .sans-serif-800;
+    line-height: 100%;
+    margin-bottom: 0.3em;
+    text-transform: uppercase;
+  }
+
+  & > h1 { font-size: 2.75em; }
+  & > h2 { font-size: 2.5em; }
+  & > h3 { font-size: 2.25em; }
+  & > h4 { font-size: 2em; }
+  & > h5 { font-size: 1.75em; }
+  & > h6 { font-size: 1.5em; }
+
+  & > p, & > a, & > strong, & > b, & > i, & > em, & > mark, 
+  & > del, & > ins {
+    font-size: 1.5em;
+    margin-bottom: 1.6875em;
+    line-height: 1.7em;
+  }
+
+  & > p, & > quote, & > a, & > i, & > mark, & > del, & > ins, 
+  & > sub, & > sup { @extend .serif-400; }
+
+  & > strong, & > b, & > em { @extend .serif-700; }
+  & > i { font-style: italic; }
+  & > em { color: $red; }
+  & > sub, & > sup { font-size: 1em;}
+
+  & > mark { 
+    background-color: $red; 
+    color: white;
+  }
+
+  & > quote {
+    font-style: italic;
+    color: $red;
+    display: block;
+    font-size: 2.5em;
+    margin-bottom: 1.6875em;
+    padding: 0 2em 0 2em;
+  }
+}
